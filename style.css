@@ -1,702 +1,477 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+const form =
+document.getElementById("form");
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+const historyTable =
+document.getElementById("historyTable");
 
-body{
+const searchInput =
+document.getElementById(
+  "searchInput"
+);
 
-  font-family:'Kanit',sans-serif;
+const monthlyTotal =
+document.getElementById(
+  "monthlyTotal"
+);
 
-  background:
-  linear-gradient(
-    135deg,
-    #0047ff 0%,
-    #192bc2 40%,
-    #6d28d9 100%
-  );
+let allRows = [];
 
-  min-height:100vh;
+let chart;
 
-  padding:30px 15px;
+/* =========================
+   AUTO EMPLOYEE
+========================= */
 
-  overflow-x:hidden;
+empId.addEventListener(
+"change",
+async()=>{
 
-  position:relative;
-}
+  if(!empId.value) return;
 
-.bg1,
-.bg2{
+  try{
 
-  position:fixed;
+    const res =
+    await fetch(
 
-  border-radius:50%;
+      `${CONFIG.API_URL}?action=employee&empId=${empId.value}`,
 
-  filter:blur(120px);
+      {
+        method:"GET",
+        mode:"cors"
+      }
 
-  z-index:0;
-}
+    );
 
-.bg1{
+    const data =
+    await res.json();
 
-  width:300px;
-  height:300px;
+    if(data.found){
 
-  background:#38bdf8;
+      fullName.value =
+      data.fullName;
 
-  top:-100px;
-  left:-100px;
+      department.value =
+      data.department;
 
-  opacity:.4;
-}
+    }else{
 
-.bg2{
+      Swal.fire({
 
-  width:350px;
-  height:350px;
+        icon:"warning",
 
-  background:#c026d3;
+        title:"ไม่พบข้อมูลพนักงาน"
 
-  bottom:-120px;
-  right:-120px;
+      });
 
-  opacity:.35;
-}
+      fullName.value = "";
+      department.value = "";
 
-.container{
+    }
 
-  width:100%;
-  max-width:1100px;
+  }catch(err){
 
-  margin:auto;
+    console.log(err);
 
-  position:relative;
-
-  z-index:2;
-}
-
-.top-title{
-
-  text-align:center;
-
-  color:#fff;
-
-  margin-bottom:30px;
-}
-
-.logo-circle{
-
-  width:100px;
-  height:100px;
-
-  background:#fff;
-
-  margin:auto;
-
-  border-radius:50%;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  margin-bottom:20px;
-
-  box-shadow:
-  0 10px 30px rgba(0,0,0,.25);
-}
-
-.logo-circle i{
-
-  font-size:45px;
-
-  color:#2563eb;
-}
-
-.top-title h1{
-
-  font-size:64px;
-
-  line-height:1.1;
-
-  font-weight:700;
-
-  text-shadow:
-  0 6px 15px rgba(0,0,0,.35);
-}
-
-.top-title p{
-
-  margin-top:10px;
-
-  font-size:22px;
-
-  color:#e2e8f0;
-}
-
-.card{
-
-  background:#f8fafc;
-
-  border-radius:36px;
-
-  padding:35px;
-
-  box-shadow:
-  0 20px 50px rgba(0,0,0,.25);
-}
-
-.section{
-
-  background:#fff;
-
-  border-radius:26px;
-
-  padding:24px;
-
-  margin-bottom:24px;
-
-  border:1px solid #e5e7eb;
-}
-
-.light-blue{
-  background:#eef4ff;
-}
-
-.light-green{
-  background:#eefbf5;
-}
-
-.light-purple{
-  background:#f7f1ff;
-}
-
-.section-title{
-
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-
-  padding:12px 20px;
-
-  border-radius:50px;
-
-  font-size:30px;
-
-  font-weight:700;
-
-  margin-bottom:24px;
-}
-
-.section-title i{
-  font-size:28px;
-}
-
-.blue{
-  color:#2563eb;
-}
-
-.green{
-  color:#10b981;
-}
-
-.purple{
-  color:#9333ea;
-}
-
-.grid-3{
-
-  display:grid;
-
-  grid-template-columns:
-  repeat(3,1fr);
-
-  gap:18px;
-}
-
-.grid-2{
-
-  display:grid;
-
-  grid-template-columns:
-  repeat(2,1fr);
-
-  gap:18px;
-}
-
-.input-box{
-
-  position:relative;
-}
-
-.input-box i{
-
-  position:absolute;
-
-  left:18px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#2563eb;
-
-  font-size:20px;
-}
-
-input,
-select,
-textarea{
-
-  width:100%;
-
-  border:none;
-
-  background:#fff;
-
-  border:2px solid #e5e7eb;
-
-  border-radius:18px;
-
-  padding:18px;
-
-  font-size:20px;
-
-  font-family:'Kanit',sans-serif;
-
-  transition:.25s;
-}
-
-.input-box input,
-.input-box select{
-
-  padding-left:55px;
-}
-
-textarea{
-  resize:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-
-  outline:none;
-
-  border-color:#3b82f6;
-
-  box-shadow:
-  0 0 0 5px rgba(59,130,246,.15);
-}
-
-.submit-btn{
-
-  width:100%;
-
-  border:none;
-
-  border-radius:24px;
-
-  padding:22px;
-
-  margin-top:10px;
-
-  background:
-  linear-gradient(
-    90deg,
-    #1687ff,
-    #7c3aed,
-    #d100ff
-  );
-
-  color:#fff;
-
-  font-size:34px;
-
-  font-weight:700;
-
-  font-family:'Kanit',sans-serif;
-
-  cursor:pointer;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-
-  transition:.3s;
-
-  box-shadow:
-  0 15px 35px rgba(124,58,237,.35);
-}
-
-.submit-btn:hover{
-
-  transform:translateY(-3px);
-
-  box-shadow:
-  0 20px 40px rgba(124,58,237,.45);
-}
-
-.footer-text{
-
-  margin-top:25px;
-
-  text-align:center;
-
-  color:#64748b;
-
-  font-size:20px;
-}
-
-#result{
-
-  margin-top:15px;
-
-  text-align:center;
-
-  color:#2563eb;
-
-  font-size:20px;
-
-  font-weight:600;
-}
-
-/* dashboard */
-
-.dashboard{
-
-  display:grid;
-
-  grid-template-columns:1fr;
-
-  gap:18px;
-
-  margin-top:30px;
-}
-
-.dash-card{
-
-  background:#fff;
-
-  border-radius:24px;
-
-  padding:24px;
-
-  text-align:center;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-
-  transition:.25s;
-}
-
-.dash-card:hover{
-  transform:translateY(-5px);
-}
-
-.dash-card h3{
-
-  font-size:18px;
-
-  color:#64748b;
-
-  margin-bottom:10px;
-}
-
-.dash-card p{
-
-  font-size:40px;
-
-  font-weight:700;
-
-  color:#2563eb;
-}
-
-/* summary */
-
-.summary-section{
-
-  margin-top:30px;
-}
-
-.summary-card{
-
-  background:#fff;
-
-  border-radius:28px;
-
-  padding:25px;
-
-  text-align:center;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-}
-
-.summary-card h3{
-
-  color:#64748b;
-
-  margin-bottom:10px;
-
-  font-size:22px;
-}
-
-.summary-card p{
-
-  font-size:48px;
-
-  font-weight:700;
-
-  color:#2563eb;
-}
-
-/* chart */
-
-.chart-box{
-
-  margin-top:30px;
-
-  background:#fff;
-
-  border-radius:28px;
-
-  padding:25px;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-}
-
-#shiftChart{
-
-  width:100% !important;
-
-  max-height:400px;
-}
-
-/* history */
-
-.history-box{
-
-  margin-top:35px;
-
-  background:#fff;
-
-  border-radius:28px;
-
-  padding:24px;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-}
-
-.history-header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:20px;
-
-  margin-bottom:20px;
-
-  flex-wrap:wrap;
-}
-
-.history-title{
-
-  font-size:28px;
-
-  color:#2563eb;
-
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-/* search */
-
-.search-box{
-
-  position:relative;
-
-  min-width:280px;
-}
-
-.search-box i{
-
-  position:absolute;
-
-  left:16px;
-
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#64748b;
-}
-
-.search-box input{
-
-  width:100%;
-
-  padding-left:45px;
-}
-
-.table-wrapper{
-
-  overflow-x:auto;
-
-  -webkit-overflow-scrolling:touch;
-}
-
-table{
-
-  width:100%;
-
-  min-width:900px;
-
-  border-collapse:collapse;
-}
-
-th{
-
-  background:#2563eb;
-
-  color:#fff;
-
-  padding:16px;
-
-  font-size:18px;
-}
-
-td{
-
-  padding:15px;
-
-  border-bottom:
-  1px solid #e5e7eb;
-
-  font-size:17px;
-}
-
-tr:hover{
-  background:#f8fafc;
-}
-
-/* loading */
-
-.loading{
-
-  pointer-events:none;
-
-  opacity:.7;
-}
-
-.loading .submit-btn{
-
-  background:#94a3b8;
-}
-
-/* responsive */
-
-@media(max-width:900px){
-
-  .grid-3{
-    grid-template-columns:1fr;
   }
 
-  .grid-2{
-    grid-template-columns:1fr;
-  }
+});
 
-  .top-title h1{
-    font-size:44px;
-  }
+/* =========================
+   DASHBOARD
+========================= */
 
-  .top-title p{
-    font-size:18px;
-  }
+let total = 0;
 
-  .section-title{
-    font-size:24px;
-  }
+function updateDashboard(){
 
-  .submit-btn{
-    font-size:26px;
+  totalRequest.innerHTML =
+  total;
+
+}
+
+/* =========================
+   HISTORY
+========================= */
+
+async function loadHistory(){
+
+  try{
+
+    const res =
+    await fetch(
+
+      `${CONFIG.API_URL}?action=history`,
+
+      {
+        method:"GET",
+        mode:"cors"
+      }
+
+    );
+
+    const rows =
+    await res.json();
+
+    allRows =
+    rows.reverse();
+
+    renderTable(allRows);
+
+    updateDashboard();
+
+    updateMonthlySummary();
+
+    createChart();
+
+  }catch(err){
+
+    console.log(err);
+
   }
 
 }
 
-@media(max-width:600px){
+/* =========================
+   RENDER TABLE
+========================= */
 
-  body{
-    padding:15px;
-  }
+function renderTable(rows){
 
-  .card{
-    padding:20px;
-    border-radius:28px;
-  }
+  historyTable.innerHTML =
+  "";
 
-  .top-title h1{
-    font-size:34px;
-  }
+  total = rows.length;
 
-  .top-title p{
-    font-size:16px;
-  }
+  rows.forEach(row=>{
 
-  .logo-circle{
+    historyTable.innerHTML +=
+    `
+    <tr>
 
-    width:75px;
-    height:75px;
-  }
+      <td>${row[1]}</td>
 
-  .logo-circle i{
-    font-size:34px;
-  }
+      <td>${row[2]}</td>
 
-  .section{
-    padding:18px;
-  }
+      <td>${row[3]}</td>
 
-  .section-title{
-    font-size:20px;
-    padding:10px 16px;
-  }
+      <td>${row[4]}</td>
 
-  input,
-  select,
-  textarea{
+      <td>${row[5]}</td>
 
-    font-size:16px;
+      <td>${row[6]}</td>
 
-    padding:15px;
-  }
+      <td>${row[7]}</td>
 
-  .input-box input,
-  .input-box select{
-    padding-left:48px;
-  }
+    </tr>
+    `;
 
-  .submit-btn{
-
-    font-size:22px;
-
-    padding:18px;
-  }
-
-  .footer-text{
-    font-size:15px;
-  }
-
-  .search-box{
-    width:100%;
-    min-width:100%;
-  }
+  });
 
 }
+
+/* =========================
+   SEARCH
+========================= */
+
+searchInput.addEventListener(
+"keyup",
+()=>{
+
+  const keyword =
+  searchInput.value
+  .toLowerCase();
+
+  const filtered =
+  allRows.filter(row=>{
+
+    return (
+
+      String(row[1])
+      .toLowerCase()
+      .includes(keyword)
+
+      ||
+
+      String(row[2])
+      .toLowerCase()
+      .includes(keyword)
+
+    );
+
+  });
+
+  renderTable(filtered);
+
+});
+
+/* =========================
+   MONTHLY SUMMARY
+========================= */
+
+function updateMonthlySummary(){
+
+  const now =
+  new Date();
+
+  const currentMonth =
+  now.getMonth();
+
+  const currentYear =
+  now.getFullYear();
+
+  let count = 0;
+
+  allRows.forEach(row=>{
+
+    const date =
+    new Date(row[9]);
+
+    if(
+
+      date.getMonth() ==
+      currentMonth
+
+      &&
+
+      date.getFullYear() ==
+      currentYear
+
+    ){
+
+      count++;
+
+    }
+
+  });
+
+  monthlyTotal.innerHTML =
+  count;
+
+}
+
+/* =========================
+   CHART
+========================= */
+
+function createChart(){
+
+  const shiftCount = {
+
+    A:0,
+    B:0,
+    C:0
+
+  };
+
+  allRows.forEach(row=>{
+
+    const shift =
+    row[7];
+
+    if(
+      shiftCount[shift]
+      !== undefined
+    ){
+
+      shiftCount[shift]++;
+
+    }
+
+  });
+
+  const ctx =
+  document
+  .getElementById(
+    "shiftChart"
+  )
+  .getContext("2d");
+
+  if(chart){
+
+    chart.destroy();
+
+  }
+
+  chart = new Chart(ctx, {
+
+    type:"bar",
+
+    data:{
+
+      labels:[
+        "A",
+        "B",
+        "C"
+      ],
+
+      datasets:[{
+
+        label:
+        "จำนวนการเปลี่ยนรอบ",
+
+        data:[
+
+          shiftCount.A,
+          shiftCount.B,
+          shiftCount.C
+
+        ],
+
+        backgroundColor:[
+
+          "#2563eb",
+          "#10b981",
+          "#9333ea"
+
+        ],
+
+        borderRadius:12
+
+      }]
+
+    },
+
+    options:{
+
+      responsive:true,
+
+      plugins:{
+
+        legend:{
+          display:false
+        }
+
+      }
+
+    }
+
+  });
+
+}
+
+/* =========================
+   SUBMIT
+========================= */
+
+form.addEventListener(
+"submit",
+async(e)=>{
+
+e.preventDefault();
+
+document.body.classList.add(
+"loading"
+);
+
+const submitBtn =
+document.querySelector(
+".submit-btn"
+);
+
+submitBtn.innerHTML =
+`
+<i class="fa-solid fa-spinner fa-spin"></i>
+กำลังบันทึก...
+`;
+
+const data = {
+
+  empId:empId.value,
+  fullName:fullName.value,
+  department:department.value,
+
+  oldDate:oldDate.value,
+  oldShift:oldShift.value,
+
+  newDate:newDate.value,
+  newShift:newShift.value,
+
+  reason:reason.value
+
+};
+
+try{
+
+  const res =
+  await fetch(CONFIG.API_URL,{
+
+    method:"POST",
+
+    mode:"cors",
+
+    headers:{
+      "Content-Type":"text/plain"
+    },
+
+    body:JSON.stringify(data)
+
+  });
+
+  const result =
+  await res.json();
+
+  if(result.result == "duplicate"){
+
+    Swal.fire({
+
+      icon:"warning",
+
+      title:"ข้อมูลซ้ำ",
+
+      text:"มีการส่งคำขอนี้แล้ว"
+
+    });
+
+  }else{
+
+    Swal.fire({
+
+      icon:"success",
+
+      title:"บันทึกสำเร็จ",
+
+      text:"ส่งคำขอเรียบร้อยแล้ว",
+
+      confirmButtonColor:"#2563eb"
+
+    });
+
+    form.reset();
+
+    loadHistory();
+
+  }
+
+}catch(err){
+
+  console.log(err);
+
+  Swal.fire({
+
+    icon:"error",
+
+    title:"เกิดข้อผิดพลาด",
+
+    text:"ไม่สามารถส่งข้อมูลได้"
+
+  });
+
+}
+
+submitBtn.innerHTML =
+`
+<i class="fa-regular fa-floppy-disk"></i>
+บันทึกข้อมูล
+`;
+
+document.body.classList.remove(
+"loading"
+);
+
+});
+
+/* =========================
+   START
+========================= */
+
+loadHistory();
