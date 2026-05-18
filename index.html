@@ -254,6 +254,32 @@ class="submit-btn"
 
 <!-- history -->
 
+<div class="summary-section">
+
+  <div class="summary-card">
+
+    <h3>สรุปเดือนนี้</h3>
+
+    <p id="monthlyTotal">0</p>
+
+  </div>
+
+</div>
+
+<div class="chart-box">
+
+  <h2 class="history-title">
+
+    <i class="fa-solid fa-chart-column"></i>
+
+    สถิติการเปลี่ยนรอบ
+
+  </h2>
+
+  <canvas id="shiftChart"></canvas>
+
+</div>
+ 
 <div class="history-box">
 
 <h2 class="history-title">
@@ -262,6 +288,18 @@ class="submit-btn"
 
 ประวัติการส่งคำขอ
 
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+  type="text"
+  id="searchInput"
+  placeholder="ค้นหารหัสพนักงาน / ชื่อ"
+>
+
+</div>
+ 
 </h2>
 
 <div class="table-wrapper">
@@ -309,6 +347,8 @@ class="submit-btn"
 <script src="script.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  
 </body>
 </html>
