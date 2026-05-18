@@ -3,7 +3,19 @@ document.getElementById("form");
 
 const historyTable =
 document.getElementById("historyTable");
+const searchInput =
+document.getElementById(
+  "searchInput"
+);
 
+const monthlyTotal =
+document.getElementById(
+  "monthlyTotal"
+);
+
+let allRows = [];
+
+let chart;
 /* =========================
    AUTO EMPLOYEE
 ========================= */
