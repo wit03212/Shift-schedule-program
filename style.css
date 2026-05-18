@@ -413,6 +413,68 @@ textarea:focus{
   color:#2563eb;
 }
 
+/* summary */
+
+.summary-section{
+
+  margin-top:30px;
+}
+
+.summary-card{
+
+  background:#fff;
+
+  border-radius:28px;
+
+  padding:25px;
+
+  text-align:center;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+}
+
+.summary-card h3{
+
+  color:#64748b;
+
+  margin-bottom:10px;
+
+  font-size:22px;
+}
+
+.summary-card p{
+
+  font-size:48px;
+
+  font-weight:700;
+
+  color:#2563eb;
+}
+
+/* chart */
+
+.chart-box{
+
+  margin-top:30px;
+
+  background:#fff;
+
+  border-radius:28px;
+
+  padding:25px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+}
+
+#shiftChart{
+
+  width:100% !important;
+
+  max-height:400px;
+}
+
 /* history */
 
 .history-box{
@@ -429,11 +491,24 @@ textarea:focus{
   0 10px 25px rgba(0,0,0,.08);
 }
 
+.history-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  margin-bottom:20px;
+
+  flex-wrap:wrap;
+}
+
 .history-title{
 
   font-size:28px;
-
-  margin-bottom:20px;
 
   color:#2563eb;
 
@@ -442,12 +517,40 @@ textarea:focus{
   gap:10px;
 }
 
+/* search */
+
+.search-box{
+
+  position:relative;
+
+  min-width:280px;
+}
+
+.search-box i{
+
+  position:absolute;
+
+  left:16px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#64748b;
+}
+
+.search-box input{
+
+  width:100%;
+
+  padding-left:45px;
+}
+
 .table-wrapper{
 
   overflow-x:auto;
 
   -webkit-overflow-scrolling:touch;
-
 }
 
 table{
@@ -590,73 +693,10 @@ tr:hover{
   .footer-text{
     font-size:15px;
   }
-/* search */
 
-/* summary */
+  .search-box{
+    width:100%;
+    min-width:100%;
+  }
 
-.summary-section{
-
-  margin-top:30px;
-
-}
-
-.summary-card{
-
-  background:#fff;
-
-  border-radius:28px;
-
-  padding:25px;
-
-  text-align:center;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.summary-card h3{
-
-  color:#64748b;
-
-  margin-bottom:10px;
-
-  font-size:22px;
-
-}
-
-.summary-card p{
-
-  font-size:48px;
-
-  font-weight:700;
-
-  color:#2563eb;
-
-}
-
-/* chart */
-
-.chart-box{
-
-  margin-top:30px;
-
-  background:#fff;
-
-  border-radius:28px;
-
-  padding:25px;
-
-  box-shadow:
-  0 10px 25px rgba(0,0,0,.08);
-
-}
-
-#shiftChart{
-
-  width:100% !important;
-
-  max-height:400px;
-
-}
 }
