@@ -17,10 +17,17 @@ form.addEventListener("submit", async (e) => {
   result.innerHTML = "กำลังบันทึก...";
 
   try {
-    const res = await fetch(CONFIG.API_URL, {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
+    await fetch(CONFIG.API_URL, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
+
+result.innerHTML = "ส่งข้อมูลแล้ว";
+form.reset();
 
     const json = await res.json();
 
