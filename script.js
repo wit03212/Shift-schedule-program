@@ -1,65 +1,242 @@
-const form = document.getElementById("form");
-const result = document.getElementById("result");
+const form =
+document.getElementById("form");
 
-form.addEventListener("submit", async (e) => {
+const historyTable =
+document.getElementById("historyTable");
 
-  e.preventDefault();
+/* =========================
+   AUTO EMPLOYEE
+========================= */
 
-  const submitBtn =
-    document.querySelector(".submit-btn");
+empId.addEventListener(
+"change",
+async()=>{
 
-  submitBtn.innerHTML =
-    "กำลังบันทึก...";
+  if(!empId.value) return;
 
-  const data = {
+  try{
 
-    empId: empId.value,
-    fullName: fullName.value,
-    department: department.value,
+    const res =
+    await fetch(
 
-    oldDate: oldDate.value,
-    oldShift: oldShift.value,
+      `${CONFIG.API_URL}?action=employee&empId=${empId.value}`
 
-    newDate: newDate.value,
-    newShift: newShift.value,
+    );
 
-    reason: reason.value
+    const data =
+    await res.json();
 
-  };
+    if(data.found){
 
-  try {
+      fullName.value =
+      data.fullName;
 
-    await fetch(CONFIG.API_URL, {
+      department.value =
+      data.department;
 
-      method:"POST",
+    }else{
 
-      mode:"no-cors",
+      Swal.fire({
 
-      headers:{
-        "Content-Type":"application/json"
-      },
+        icon:"warning",
 
-      body:JSON.stringify(data)
+        title:"ไม่พบข้อมูลพนักงาน"
 
-    });
+      });
 
-    result.innerHTML =
-      "ส่งข้อมูลเรียบร้อยแล้ว";
+      fullName.value = "";
+      department.value = "";
 
-    submitBtn.innerHTML =
-      "บันทึกข้อมูล";
+    }
 
-    form.reset();
-
-  } catch(err){
+  }catch(err){
 
     console.log(err);
 
-    result.innerHTML =
-      "เกิดข้อผิดพลาด";
-
-    submitBtn.innerHTML =
-      "บันทึกข้อมูล";
   }
+
+});
+
+/* =========================
+   DASHBOARD
+========================= */
+
+let total = 0;
+
+function updateDashboard(){
+
+  totalRequest.innerHTML = total;
+
+}
+
+/* =========================
+   HISTORY
+========================= */
+
+async function loadHistory(){
+
+  try{
+
+    const res =
+    await fetch(
+      `${CONFIG.API_URL}?action=history`
+    );
+
+    const rows =
+    await res.json();
+
+    historyTable.innerHTML = "";
+
+    total = rows.length;
+
+    updateDashboard();
+
+    rows.reverse();
+
+    rows.forEach(row=>{
+
+      historyTable.innerHTML +=
+      `
+      <tr>
+
+        <td>${row[1]}</td>
+
+        <td>${row[2]}</td>
+
+        <td>${row[3]}</td>
+
+        <td>${row[7]}</td>
+
+      </tr>
+      `;
+
+    });
+
+  }catch(err){
+
+    console.log(err);
+
+  }
+
+}
+
+loadHistory();
+
+/* =========================
+   SUBMIT
+========================= */
+
+form.addEventListener(
+"submit",
+async(e)=>{
+
+e.preventDefault();
+
+document.body.classList.add(
+"loading"
+);
+
+const submitBtn =
+document.querySelector(
+".submit-btn"
+);
+
+submitBtn.innerHTML =
+`
+<i class="fa-solid fa-spinner fa-spin"></i>
+กำลังบันทึก...
+`;
+
+const data = {
+
+  empId:empId.value,
+  fullName:fullName.value,
+  department:department.value,
+
+  oldDate:oldDate.value,
+  oldShift:oldShift.value,
+
+  newDate:newDate.value,
+  newShift:newShift.value,
+
+  reason:reason.value
+
+};
+
+try{
+
+  const res =
+  await fetch(CONFIG.API_URL,{
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json"
+    },
+
+    body:JSON.stringify(data)
+
+  });
+
+  const result =
+  await res.json();
+
+  if(result.result == "duplicate"){
+
+    Swal.fire({
+
+      icon:"warning",
+
+      title:"ข้อมูลซ้ำ",
+
+      text:"มีการส่งคำขอนี้แล้ว"
+
+    });
+
+  }else{
+
+    Swal.fire({
+
+      icon:"success",
+
+      title:"บันทึกสำเร็จ",
+
+      text:"ส่งคำขอเรียบร้อยแล้ว",
+
+      confirmButtonColor:"#2563eb"
+
+    });
+
+    form.reset();
+
+    loadHistory();
+
+  }
+
+}catch(err){
+
+  console.log(err);
+
+  Swal.fire({
+
+    icon:"error",
+
+    title:"เกิดข้อผิดพลาด",
+
+    text:"ไม่สามารถส่งข้อมูลได้"
+
+  });
+
+}
+
+submitBtn.innerHTML =
+`
+<i class="fa-regular fa-floppy-disk"></i>
+บันทึกข้อมูล
+`;
+
+document.body.classList.remove(
+"loading"
+);
 
 });
