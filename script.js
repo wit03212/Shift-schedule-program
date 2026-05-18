@@ -1,4 +1,5 @@
 const form = document.getElementById("form");
+const result = document.getElementById("result");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -17,6 +18,7 @@ form.addEventListener("submit", async (e) => {
   result.innerHTML = "กำลังส่งข้อมูล...";
 
   try {
+
     await fetch(CONFIG.API_URL, {
       method: "POST",
       mode: "no-cors",
@@ -26,11 +28,14 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(data)
     });
 
-    result.innerHTML = "ส่งข้อมูลแล้ว";
+    result.innerHTML = "ส่งข้อมูลเรียบร้อยแล้ว";
+
     form.reset();
 
   } catch (err) {
+
     console.log(err);
     result.innerHTML = "เกิดข้อผิดพลาด";
+
   }
 });
