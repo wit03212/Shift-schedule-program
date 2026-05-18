@@ -443,12 +443,18 @@ textarea:focus{
 }
 
 .table-wrapper{
-  overflow:auto;
+
+  overflow-x:auto;
+
+  -webkit-overflow-scrolling:touch;
+
 }
 
 table{
 
   width:100%;
+
+  min-width:900px;
 
   border-collapse:collapse;
 }
