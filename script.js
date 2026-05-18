@@ -19,7 +19,12 @@ async()=>{
     const res =
     await fetch(
 
-      `${CONFIG.API_URL}?action=employee&empId=${empId.value}`
+      `${CONFIG.API_URL}?action=employee&empId=${empId.value}`,
+
+      {
+        method:"GET",
+        mode:"cors"
+      }
 
     );
 
@@ -79,7 +84,14 @@ async function loadHistory(){
 
     const res =
     await fetch(
-      `${CONFIG.API_URL}?action=history`
+
+      `${CONFIG.API_URL}?action=history`,
+
+      {
+        method:"GET",
+        mode:"cors"
+      }
+
     );
 
     const rows =
@@ -170,8 +182,10 @@ try{
 
     method:"POST",
 
+    mode:"cors",
+
     headers:{
-      "Content-Type":"application/json"
+      "Content-Type":"text/plain"
     },
 
     body:JSON.stringify(data)
