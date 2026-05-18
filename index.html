@@ -252,35 +252,41 @@ class="submit-btn"
 
 </div>
 
-<!-- history -->
+<!-- monthly summary -->
 
 <div class="summary-section">
 
-  <div class="summary-card">
+<div class="summary-card">
 
-    <h3>สรุปเดือนนี้</h3>
+<h3>สรุปเดือนนี้</h3>
 
-    <p id="monthlyTotal">0</p>
-
-  </div>
+<p id="monthlyTotal">0</p>
 
 </div>
+
+</div>
+
+<!-- chart -->
 
 <div class="chart-box">
 
-  <h2 class="history-title">
+<h2 class="history-title">
 
-    <i class="fa-solid fa-chart-column"></i>
+<i class="fa-solid fa-chart-column"></i>
 
-    สถิติการเปลี่ยนรอบ
+สถิติการเปลี่ยนรอบ
 
-  </h2>
+</h2>
 
-  <canvas id="shiftChart"></canvas>
+<canvas id="shiftChart"></canvas>
 
 </div>
- 
+
+<!-- history -->
+
 <div class="history-box">
+
+<div class="history-header">
 
 <h2 class="history-title">
 
@@ -288,19 +294,21 @@ class="submit-btn"
 
 ประวัติการส่งคำขอ
 
+</h2>
+
 <div class="search-box">
 
 <i class="fa-solid fa-magnifying-glass"></i>
 
 <input
-  type="text"
-  id="searchInput"
-  placeholder="ค้นหารหัสพนักงาน / ชื่อ"
+type="text"
+id="searchInput"
+placeholder="ค้นหารหัสพนักงาน / ชื่อ"
 >
 
 </div>
- 
-</h2>
+
+</div>
 
 <div class="table-wrapper">
 
@@ -335,11 +343,13 @@ class="submit-btn"
 </table>
 
 </div>
+
 </div>
 
 </form>
 
 </div>
+
 </div>
 
 <script src="config.js"></script>
@@ -349,6 +359,6 @@ class="submit-btn"
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- 
+
 </body>
 </html>
