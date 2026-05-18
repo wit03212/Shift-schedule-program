@@ -1,7 +1,7 @@
 const CONFIG = {
 
   API_URL:
-    "https://docs.google.com/spreadsheets/d/15T3HJVZjVL89gGg6l7uSvQAwodlK7avoSc57stolF5E/edit?usp=sharing",
+    "https://script.google.com/macros/s/AKfycbyO95BjkoUGbx0INfLREsvZXNXKqOq8TNMDIGnDaxuc3w04Lb71n1g6k_L7VKWejwgv/exec",
 
   ADMIN_PASSWORD:
     "12345678"
