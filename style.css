@@ -590,5 +590,73 @@ tr:hover{
   .footer-text{
     font-size:15px;
   }
+/* search */
 
+/* summary */
+
+.summary-section{
+
+  margin-top:30px;
+
+}
+
+.summary-card{
+
+  background:#fff;
+
+  border-radius:28px;
+
+  padding:25px;
+
+  text-align:center;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.summary-card h3{
+
+  color:#64748b;
+
+  margin-bottom:10px;
+
+  font-size:22px;
+
+}
+
+.summary-card p{
+
+  font-size:48px;
+
+  font-weight:700;
+
+  color:#2563eb;
+
+}
+
+/* chart */
+
+.chart-box{
+
+  margin-top:30px;
+
+  background:#fff;
+
+  border-radius:28px;
+
+  padding:25px;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,.08);
+
+}
+
+#shiftChart{
+
+  width:100% !important;
+
+  max-height:400px;
+
+}
 }
