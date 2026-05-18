@@ -3,6 +3,7 @@ document.getElementById("form");
 
 const historyTable =
 document.getElementById("historyTable");
+
 const searchInput =
 document.getElementById(
   "searchInput"
@@ -16,6 +17,7 @@ document.getElementById(
 let allRows = [];
 
 let chart;
+
 /* =========================
    AUTO EMPLOYEE
 ========================= */
@@ -82,7 +84,8 @@ let total = 0;
 
 function updateDashboard(){
 
-  totalRequest.innerHTML = total;
+  totalRequest.innerHTML =
+  total;
 
 }
 
@@ -109,7 +112,8 @@ async function loadHistory(){
     const rows =
     await res.json();
 
-    allRows = rows.reverse();
+    allRows =
+    rows.reverse();
 
     renderTable(allRows);
 
@@ -128,6 +132,224 @@ async function loadHistory(){
 }
 
 loadHistory();
+
+/* =========================
+   RENDER TABLE
+========================= */
+
+function renderTable(rows){
+
+  historyTable.innerHTML =
+  "";
+
+  total = rows.length;
+
+  rows.forEach(row=>{
+
+    historyTable.innerHTML +=
+    `
+    <tr>
+
+      <td>${row[1]}</td>
+
+      <td>${row[2]}</td>
+
+      <td>${row[3]}</td>
+
+      <td>${row[4]}</td>
+
+      <td>${row[5]}</td>
+
+      <td>${row[6]}</td>
+
+      <td>${row[7]}</td>
+
+    </tr>
+    `;
+
+  });
+
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+searchInput.addEventListener(
+"keyup",
+()=>{
+
+  const keyword =
+  searchInput.value
+  .toLowerCase();
+
+  const filtered =
+  allRows.filter(row=>{
+
+    return (
+
+      String(row[1])
+      .toLowerCase()
+      .includes(keyword)
+
+      ||
+
+      String(row[2])
+      .toLowerCase()
+      .includes(keyword)
+
+    );
+
+  });
+
+  renderTable(filtered);
+
+});
+
+/* =========================
+   MONTHLY SUMMARY
+========================= */
+
+function updateMonthlySummary(){
+
+  const now =
+  new Date();
+
+  const currentMonth =
+  now.getMonth();
+
+  const currentYear =
+  now.getFullYear();
+
+  let count = 0;
+
+  allRows.forEach(row=>{
+
+    const date =
+    new Date(row[9]);
+
+    if(
+
+      date.getMonth() ==
+      currentMonth
+
+      &&
+
+      date.getFullYear() ==
+      currentYear
+
+    ){
+
+      count++;
+
+    }
+
+  });
+
+  monthlyTotal.innerHTML =
+  count;
+
+}
+
+/* =========================
+   CHART
+========================= */
+
+function createChart(){
+
+  const shiftCount = {
+
+    A:0,
+    B:0,
+    C:0
+
+  };
+
+  allRows.forEach(row=>{
+
+    const shift =
+    row[7];
+
+    if(
+      shiftCount[shift]
+      !== undefined
+    ){
+
+      shiftCount[shift]++;
+
+    }
+
+  });
+
+  const ctx =
+  document
+  .getElementById(
+    "shiftChart"
+  )
+  .getContext("2d");
+
+  if(chart){
+
+    chart.destroy();
+
+  }
+
+  chart = new Chart(ctx, {
+
+    type:"bar",
+
+    data:{
+
+      labels:[
+        "A",
+        "B",
+        "C"
+      ],
+
+      datasets:[{
+
+        label:
+        "จำนวนการเปลี่ยนรอบ",
+
+        data:[
+
+          shiftCount.A,
+          shiftCount.B,
+          shiftCount.C
+
+        ],
+
+        backgroundColor:[
+
+          "#2563eb",
+          "#10b981",
+          "#9333ea"
+
+        ],
+
+        borderRadius:12
+
+      }]
+
+    },
+
+    options:{
+
+      responsive:true,
+
+      plugins:{
+
+        legend:{
+          display:false
+        }
+
+      }
+
+    }
+
+  });
+
+}
 
 /* =========================
    SUBMIT
