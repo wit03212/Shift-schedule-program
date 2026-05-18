@@ -109,38 +109,15 @@ async function loadHistory(){
     const rows =
     await res.json();
 
-    historyTable.innerHTML = "";
+    allRows = rows.reverse();
 
-    total = rows.length;
+    renderTable(allRows);
 
     updateDashboard();
 
-    rows.reverse();
+    updateMonthlySummary();
 
-    rows.forEach(row=>{
-
-      historyTable.innerHTML +=
-`
-<tr>
-
-  <td>${row[1]}</td>
-
-  <td>${row[2]}</td>
-
-  <td>${row[3]}</td>
-
-  <td>${row[4]}</td>
-
-  <td>${row[5]}</td>
-
-  <td>${row[6]}</td>
-
-  <td>${row[7]}</td>
-
-</tr>
-`;
-
-    });
+    createChart();
 
   }catch(err){
 
