@@ -1,35 +1,22 @@
 <!DOCTYPE html>
-<html lang="th">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ระบบเปลี่ยนรอบการทำงาน</title>
-
-<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-<button class="toggle-dark" onclick="toggleDark()">
-Dark Mode
-</button>
-
 <div class="card">
 
-<h2>แบบฟอร์มเปลี่ยนรอบการทำงาน</h2>
+<div class="header">
+  <h2>เปลี่ยนรอบการทำงาน</h2>
+  <p>กรอกข้อมูลเพื่อส่งคำขอเปลี่ยนรอบงาน</p>
+</div>
 
 <form id="form">
 
-<!-- รหัสพนักงาน -->
 <input type="text" id="empId" placeholder="รหัสพนักงาน" required>
 
-<!-- ชื่อ -->
 <input type="text" id="fullName" placeholder="ชื่อ-นามสกุล" required>
 
-<!-- แผนก -->
 <select id="department" required>
   <option value="">เลือกแผนก</option>
   <option>ผลิต</option>
@@ -40,7 +27,6 @@ Dark Mode
 
 <hr>
 
-<!-- วันที่ + รอบเดิม -->
 <label>วันที่รอบเดิม</label>
 <input type="date" id="oldDate" required>
 
@@ -53,7 +39,6 @@ Dark Mode
 
 <hr>
 
-<!-- วันที่ + รอบใหม่ -->
 <label>วันที่รอบใหม่</label>
 <input type="date" id="newDate" required>
 
@@ -66,33 +51,25 @@ Dark Mode
 
 <hr>
 
-<!-- เหตุผล -->
 <textarea
 id="reason"
 placeholder="เหตุผลในการเปลี่ยนรอบงาน"
 rows="5"
 required></textarea>
 
-<!-- ปุ่ม -->
-<button type="submit">บันทึกข้อมูล</button>
+<button type="submit" class="submit-btn">
+บันทึกข้อมูล
+</button>
 
 </form>
 
 <p id="result"></p>
 
 </div>
-
 </div>
 
-<!-- config + script -->
 <script src="config.js"></script>
 <script src="script.js"></script>
-
-<script>
-function toggleDark() {
-  document.body.classList.toggle("dark");
-}
-</script>
 
 </body>
 </html>
