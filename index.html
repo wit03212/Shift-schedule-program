@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
 
 <title>ระบบเปลี่ยนรอบการทำงาน</title>
 
-<link rel="stylesheet" href="style.css">
+<link
+rel="stylesheet"
+href="style.css"
+/>
 
 <link
 rel="stylesheet"
@@ -23,10 +31,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <div class="container">
 
+<!-- title -->
+
 <div class="top-title">
 
 <div class="logo-circle">
+
 <i class="fa-solid fa-calendar-days"></i>
+
 </div>
 
 <h1>เปลี่ยนรอบการทำงาน</h1>
@@ -37,78 +49,104 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </div>
 
+<!-- card -->
+
 <div class="card">
 
 <form id="form">
 
-<!-- section -->
+<!-- employee -->
+
 <div class="section">
 
 <div class="section-title blue">
+
 <i class="fa-regular fa-user"></i>
+
 ข้อมูลพนักงาน
+
 </div>
 
 <div class="grid-3">
 
 <div class="input-box">
+
 <i class="fa-regular fa-id-card"></i>
+
 <input
 type="text"
 id="empId"
 placeholder="รหัสพนักงาน"
 required
 >
+
 </div>
 
 <div class="input-box">
+
 <i class="fa-regular fa-user"></i>
+
 <input
 type="text"
 id="fullName"
 placeholder="ชื่อ-นามสกุล"
 required
+readonly
 >
+
 </div>
 
 <div class="input-box">
 
 <i class="fa-regular fa-building"></i>
 
-<select id="department" required>
-<option value="">เลือกแผนก</option>
-<option>ผลิต</option>
-<option>QC</option>
-<option>คลังสินค้า</option>
-<option>ซ่อมบำรุง</option>
-</select>
+<input
+type="text"
+id="department"
+placeholder="แผนก"
+required
+readonly
+>
 
 </div>
 
 </div>
 </div>
 
-<!-- section -->
+<!-- old shift -->
+
 <div class="section light-blue">
 
 <div class="section-title blue">
+
 <i class="fa-regular fa-calendar"></i>
+
 วันที่รอบเดิม
+
 </div>
 
 <div class="grid-2">
 
 <div class="input-box">
-<input type="date" id="oldDate" required>
+
+<input
+type="date"
+id="oldDate"
+required
+>
+
 </div>
 
 <div class="input-box">
 
 <select id="oldShift" required>
+
 <option value="">รอบการทำงานเดิม</option>
+
 <option>A</option>
 <option>B</option>
 <option>C</option>
+
 </select>
 
 </div>
@@ -116,27 +154,40 @@ required
 </div>
 </div>
 
-<!-- section -->
+<!-- new shift -->
+
 <div class="section light-green">
 
 <div class="section-title green">
+
 <i class="fa-regular fa-calendar-check"></i>
+
 วันที่รอบใหม่
+
 </div>
 
 <div class="grid-2">
 
 <div class="input-box">
-<input type="date" id="newDate" required>
+
+<input
+type="date"
+id="newDate"
+required
+>
+
 </div>
 
 <div class="input-box">
 
 <select id="newShift" required>
+
 <option value="">รอบการทำงานใหม่</option>
+
 <option>A</option>
 <option>B</option>
 <option>C</option>
+
 </select>
 
 </div>
@@ -144,12 +195,16 @@ required
 </div>
 </div>
 
-<!-- section -->
+<!-- reason -->
+
 <div class="section light-purple">
 
 <div class="section-title purple">
+
 <i class="fa-regular fa-pen-to-square"></i>
+
 เหตุผลในการเปลี่ยนรอบงาน
+
 </div>
 
 <textarea
@@ -160,7 +215,12 @@ required></textarea>
 
 </div>
 
-<button type="submit" class="submit-btn">
+<!-- button -->
+
+<button
+type="submit"
+class="submit-btn"
+>
 
 <i class="fa-regular fa-floppy-disk"></i>
 
@@ -169,11 +229,66 @@ required></textarea>
 </button>
 
 <p class="footer-text">
+
 <i class="fa-solid fa-lock"></i>
+
 ข้อมูลของท่านจะถูกเก็บเป็นความลับ
+
 </p>
 
 <p id="result"></p>
+
+<!-- dashboard -->
+
+<div class="dashboard">
+
+<div class="dash-card">
+
+<h3>จำนวนคำขอทั้งหมด</h3>
+
+<p id="totalRequest">0</p>
+
+</div>
+
+</div>
+
+<!-- history -->
+
+<div class="history-box">
+
+<h2 class="history-title">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+
+ประวัติการส่งคำขอ
+
+</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>รหัส</th>
+<th>ชื่อ</th>
+<th>แผนก</th>
+<th>รอบใหม่</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTable">
+
+</tbody>
+
+</table>
+
+</div>
+</div>
 
 </form>
 
@@ -181,7 +296,10 @@ required></textarea>
 </div>
 
 <script src="config.js"></script>
+
 <script src="script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
