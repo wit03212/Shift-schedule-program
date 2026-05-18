@@ -26,7 +26,6 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(data)
     });
 
-    // no-cors = ไม่ได้ response กลับ
     result.innerHTML = "ส่งข้อมูลแล้ว";
     form.reset();
 
