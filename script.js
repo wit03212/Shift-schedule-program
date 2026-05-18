@@ -14,32 +14,24 @@ form.addEventListener("submit", async (e) => {
     reason: reason.value
   };
 
-  result.innerHTML = "กำลังบันทึก...";
+  result.innerHTML = "กำลังส่งข้อมูล...";
 
   try {
     await fetch(CONFIG.API_URL, {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-});
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
 
-result.innerHTML = "ส่งข้อมูลแล้ว";
-form.reset();
-
-    const json = await res.json();
-
-    if (json.result === "duplicate") {
-      result.innerHTML = "ข้อมูลซ้ำ";
-      return;
-    }
-
-    result.innerHTML = "บันทึกสำเร็จ";
+    // no-cors = ไม่ได้ response กลับ
+    result.innerHTML = "ส่งข้อมูลแล้ว";
     form.reset();
 
   } catch (err) {
+    console.log(err);
     result.innerHTML = "เกิดข้อผิดพลาด";
   }
 });
