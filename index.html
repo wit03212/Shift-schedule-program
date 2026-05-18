@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+ระบบเปลี่ยนรอบการทำงาน
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<button
+class="toggle-dark"
+onclick="toggleDark()">
+
+Dark Mode
+
+</button>
+
+<div class="card">
+
+<h2>
+แบบฟอร์มเปลี่ยนรอบการทำงาน
+</h2>
+
+<form id="form">
+
+<input
+type="text"
+id="empId"
+placeholder="รหัสพนักงาน"
+required>
+
+<input
+type="text"
+id="fullName"
+placeholder="ชื่อ-นามสกุล"
+required>
+
+<select
+id="department"
+required>
+
+<option value="">
+เลือกแผนก
+</option>
+
+<option>ผลิต</option>
+<option>QC</option>
+<option>คลังสินค้า</option>
+<option>ซ่อมบำรุง</option>
+
+</select>
+
+<input
+type="date"
+id="oldDate"
+required>
+
+<select
+id="oldShift"
+required>
+
+<option value="">
+รอบการทำงานเดิม
+</option>
+
+<option>A</option>
+<option>B</option>
+<option>C</option>
+
+</select>
+
+<input
+type="date"
+id="newDate"
+required>
+
+<select
+id="newShift"
+required>
+
+<option value="">
+รอบการทำงานใหม่
+</option>
+
+<option>A</option>
+<option>B</option>
+<option>C</option>
+
+</select>
+
+<textarea
+id="reason"
+placeholder="เหตุผลในการเปลี่ยนรอบงาน"
+required
+rows="5"></textarea>
+
+<button type="submit">
+
+บันทึกข้อมูล
+
+</button>
+
+</form>
+
+<p id="result"></p>
+
+</div>
+
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
