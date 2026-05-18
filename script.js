@@ -108,19 +108,25 @@ async function loadHistory(){
     rows.forEach(row=>{
 
       historyTable.innerHTML +=
-      `
-      <tr>
+`
+<tr>
 
-        <td>${row[1]}</td>
+  <td>${row[1]}</td>
 
-        <td>${row[2]}</td>
+  <td>${row[2]}</td>
 
-        <td>${row[3]}</td>
+  <td>${row[3]}</td>
 
-        <td>${row[7]}</td>
+  <td>${row[4]}</td>
 
-      </tr>
-      `;
+  <td>${row[5]}</td>
+
+  <td>${row[6]}</td>
+
+  <td>${row[7]}</td>
+
+</tr>
+`;
 
     });
 
