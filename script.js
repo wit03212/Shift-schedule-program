@@ -41,26 +41,6 @@ let allRows = [];
 
 let chart;
 
-const form =
-document.getElementById("form");
-
-const historyTable =
-document.getElementById("historyTable");
-
-const searchInput =
-document.getElementById(
-  "searchInput"
-);
-
-const monthlyTotal =
-document.getElementById(
-  "monthlyTotal"
-);
-
-let allRows = [];
-
-let chart;
-
 /* =========================
    AUTO EMPLOYEE
 ========================= */
@@ -174,8 +154,6 @@ async function loadHistory(){
 
 }
 
-loadHistory();
-
 /* =========================
    RENDER TABLE
 ========================= */
@@ -193,19 +171,19 @@ function renderTable(rows){
     `
     <tr>
 
-      <td>${row[1]}</td>
+      <td>${row[1] || ""}</td>
 
-      <td>${row[2]}</td>
+      <td>${row[2] || ""}</td>
 
-      <td>${row[3]}</td>
+      <td>${row[3] || ""}</td>
 
-      <td>${row[4]}</td>
+      <td>${row[4] || ""}</td>
 
-      <td>${row[5]}</td>
+      <td>${row[5] || ""}</td>
 
-      <td>${row[6]}</td>
+      <td>${row[6] || ""}</td>
 
-      <td>${row[7]}</td>
+      <td>${row[7] || ""}</td>
 
     </tr>
     `;
@@ -231,13 +209,13 @@ searchInput.addEventListener(
 
     return (
 
-      String(row[1])
+      String(row[1] || "")
       .toLowerCase()
       .includes(keyword)
 
       ||
 
-      String(row[2])
+      String(row[2] || "")
       .toLowerCase()
       .includes(keyword)
 
@@ -267,6 +245,8 @@ function updateMonthlySummary(){
   let count = 0;
 
   allRows.forEach(row=>{
+
+    if(!row[9]) return;
 
     const date =
     new Date(row[9]);
@@ -324,12 +304,15 @@ function createChart(){
 
   });
 
-  const ctx =
-  document
-  .getElementById(
+  const canvas =
+  document.getElementById(
     "shiftChart"
-  )
-  .getContext("2d");
+  );
+
+  if(!canvas) return;
+
+  const ctx =
+  canvas.getContext("2d");
 
   if(chart){
 
@@ -514,3 +497,9 @@ document.body.classList.remove(
 );
 
 });
+
+/* =========================
+   START
+========================= */
+
+loadHistory();
