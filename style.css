@@ -1,477 +1,273 @@
-const form =
-document.getElementById("form");
+/* style.css - โค้ดสำหรับตกแต่งหน้าตาเว็บให้กลับมาสวยงาม */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
 
-const historyTable =
-document.getElementById("historyTable");
-
-const searchInput =
-document.getElementById(
-  "searchInput"
-);
-
-const monthlyTotal =
-document.getElementById(
-  "monthlyTotal"
-);
-
-let allRows = [];
-
-let chart;
-
-/* =========================
-   AUTO EMPLOYEE
-========================= */
-
-empId.addEventListener(
-"change",
-async()=>{
-
-  if(!empId.value) return;
-
-  try{
-
-    const res =
-    await fetch(
-
-      `${CONFIG.API_URL}?action=employee&empId=${empId.value}`,
-
-      {
-        method:"GET",
-        mode:"cors"
-      }
-
-    );
-
-    const data =
-    await res.json();
-
-    if(data.found){
-
-      fullName.value =
-      data.fullName;
-
-      department.value =
-      data.department;
-
-    }else{
-
-      Swal.fire({
-
-        icon:"warning",
-
-        title:"ไม่พบข้อมูลพนักงาน"
-
-      });
-
-      fullName.value = "";
-      department.value = "";
-
-    }
-
-  }catch(err){
-
-    console.log(err);
-
-  }
-
-});
-
-/* =========================
-   DASHBOARD
-========================= */
-
-let total = 0;
-
-function updateDashboard(){
-
-  totalRequest.innerHTML =
-  total;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sarabun', sans-serif;
 }
 
-/* =========================
-   HISTORY
-========================= */
-
-async function loadHistory(){
-
-  try{
-
-    const res =
-    await fetch(
-
-      `${CONFIG.API_URL}?action=history`,
-
-      {
-        method:"GET",
-        mode:"cors"
-      }
-
-    );
-
-    const rows =
-    await res.json();
-
-    allRows =
-    rows.reverse();
-
-    renderTable(allRows);
-
-    updateDashboard();
-
-    updateMonthlySummary();
-
-    createChart();
-
-  }catch(err){
-
-    console.log(err);
-
-  }
-
+body {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
 }
 
-/* =========================
-   RENDER TABLE
-========================= */
+/* พื้นหลังไล่เฉดสีตกแต่ง */
+.bg1, .bg2 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(100px);
+    opacity: 0.4;
+}
+.bg1 { top: -100px; left: -100px; background-color: #3b82f6; }
+.bg2 { bottom: -100px; right: -100px; background-color: #10b981; }
 
-function renderTable(rows){
-
-  historyTable.innerHTML =
-  "";
-
-  total = rows.length;
-
-  rows.forEach(row=>{
-
-    historyTable.innerHTML +=
-    `
-    <tr>
-
-      <td>${row[1]}</td>
-
-      <td>${row[2]}</td>
-
-      <td>${row[3]}</td>
-
-      <td>${row[4]}</td>
-
-      <td>${row[5]}</td>
-
-      <td>${row[6]}</td>
-
-      <td>${row[7]}</td>
-
-    </tr>
-    `;
-
-  });
-
+.container {
+    max-width: 850px;
+    margin: 0 auto;
 }
 
-/* =========================
-   SEARCH
-========================= */
-
-searchInput.addEventListener(
-"keyup",
-()=>{
-
-  const keyword =
-  searchInput.value
-  .toLowerCase();
-
-  const filtered =
-  allRows.filter(row=>{
-
-    return (
-
-      String(row[1])
-      .toLowerCase()
-      .includes(keyword)
-
-      ||
-
-      String(row[2])
-      .toLowerCase()
-      .includes(keyword)
-
-    );
-
-  });
-
-  renderTable(filtered);
-
-});
-
-/* =========================
-   MONTHLY SUMMARY
-========================= */
-
-function updateMonthlySummary(){
-
-  const now =
-  new Date();
-
-  const currentMonth =
-  now.getMonth();
-
-  const currentYear =
-  now.getFullYear();
-
-  let count = 0;
-
-  allRows.forEach(row=>{
-
-    const date =
-    new Date(row[9]);
-
-    if(
-
-      date.getMonth() ==
-      currentMonth
-
-      &&
-
-      date.getFullYear() ==
-      currentYear
-
-    ){
-
-      count++;
-
-    }
-
-  });
-
-  monthlyTotal.innerHTML =
-  count;
-
+/* ส่วนหัวข้อ (Title) */
+.top-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+.logo-circle {
+    width: 65px;
+    height: 65px;
+    background: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 15px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+.top-title h1 {
+    font-size: 26px;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+.top-title p {
+    color: #64748b;
+    font-size: 15px;
 }
 
-/* =========================
-   CHART
-========================= */
-
-function createChart(){
-
-  const shiftCount = {
-
-    A:0,
-    B:0,
-    C:0
-
-  };
-
-  allRows.forEach(row=>{
-
-    const shift =
-    row[7];
-
-    if(
-      shiftCount[shift]
-      !== undefined
-    ){
-
-      shiftCount[shift]++;
-
-    }
-
-  });
-
-  const ctx =
-  document
-  .getElementById(
-    "shiftChart"
-  )
-  .getContext("2d");
-
-  if(chart){
-
-    chart.destroy();
-
-  }
-
-  chart = new Chart(ctx, {
-
-    type:"bar",
-
-    data:{
-
-      labels:[
-        "A",
-        "B",
-        "C"
-      ],
-
-      datasets:[{
-
-        label:
-        "จำนวนการเปลี่ยนรอบ",
-
-        data:[
-
-          shiftCount.A,
-          shiftCount.B,
-          shiftCount.C
-
-        ],
-
-        backgroundColor:[
-
-          "#2563eb",
-          "#10b981",
-          "#9333ea"
-
-        ],
-
-        borderRadius:12
-
-      }]
-
-    },
-
-    options:{
-
-      responsive:true,
-
-      plugins:{
-
-        legend:{
-          display:false
-        }
-
-      }
-
-    }
-
-  });
-
+/* การ์ดหลัก */
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
-/* =========================
-   SUBMIT
-========================= */
+/* จัดกลุ่มข้อมูล (Section) */
+.section {
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+.section.light-blue { background-color: #f8fafc; border-left: 5px solid #2563eb; }
+.section.light-green { background-color: #f8fafc; border-left: 5px solid #10b981; }
+.section.light-purple { background-color: #f8fafc; border-left: 5px solid #9333ea; }
 
-form.addEventListener(
-"submit",
-async(e)=>{
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.section-title.blue { color: #2563eb; }
+.section-title.green { color: #10b981; }
+.section-title.purple { color: #9333ea; }
 
-e.preventDefault();
-
-document.body.classList.add(
-"loading"
-);
-
-const submitBtn =
-document.querySelector(
-".submit-btn"
-);
-
-submitBtn.innerHTML =
-`
-<i class="fa-solid fa-spinner fa-spin"></i>
-กำลังบันทึก...
-`;
-
-const data = {
-
-  empId:empId.value,
-  fullName:fullName.value,
-  department:department.value,
-
-  oldDate:oldDate.value,
-  oldShift:oldShift.value,
-
-  newDate:newDate.value,
-  newShift:newShift.value,
-
-  reason:reason.value
-
-};
-
-try{
-
-  const res =
-  await fetch(CONFIG.API_URL,{
-
-    method:"POST",
-
-    mode:"cors",
-
-    headers:{
-      "Content-Type":"text/plain"
-    },
-
-    body:JSON.stringify(data)
-
-  });
-
-  const result =
-  await res.json();
-
-  if(result.result == "duplicate"){
-
-    Swal.fire({
-
-      icon:"warning",
-
-      title:"ข้อมูลซ้ำ",
-
-      text:"มีการส่งคำขอนี้แล้ว"
-
-    });
-
-  }else{
-
-    Swal.fire({
-
-      icon:"success",
-
-      title:"บันทึกสำเร็จ",
-
-      text:"ส่งคำขอเรียบร้อยแล้ว",
-
-      confirmButtonColor:"#2563eb"
-
-    });
-
-    form.reset();
-
-    loadHistory();
-
-  }
-
-}catch(err){
-
-  console.log(err);
-
-  Swal.fire({
-
-    icon:"error",
-
-    title:"เกิดข้อผิดพลาด",
-
-    text:"ไม่สามารถส่งข้อมูลได้"
-
-  });
-
+/* Grid Layout สำหรับจัดระเบียบฝั่งพนักงานและวันที่ */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
 }
 
-submitBtn.innerHTML =
-`
-<i class="fa-regular fa-floppy-disk"></i>
-บันทึกข้อมูล
-`;
+/* กล่องกรอกข้อมูล */
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-box i {
+    position: absolute;
+    left: 14px;
+    color: #94a3b8;
+}
+.input-box input, .input-box select, textarea {
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+.input-box input:focus, .input-box select:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.input-box input[readonly] {
+    background-color: #f8fafc;
+    color: #64748b;
+    cursor: not-allowed;
+    border-color: #e2e8f0;
+}
+.input-box input[type="date"], .input-box select {
+    padding-left: 14px; /* เอาไอคอนออกสำหรับช่องวันที่และเลือกเพื่อความสะอาด */
+}
+textarea {
+    padding: 14px;
+    resize: vertical;
+}
 
-document.body.classList.remove(
-"loading"
-);
+/* ปุ่มบันทึกข้อมูล */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+.submit-btn:hover { background: #1d4ed8; }
 
-});
+.footer-text {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 20px;
+}
 
-/* =========================
-   START
-========================= */
+/* แดชบอร์ดสรุปยอดจำนวนคำขอ */
+.dashboard, .summary-section {
+    display: inline-block;
+    width: 49%;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+.summary-section { float: right; }
+.dash-card, .summary-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+.dash-card h3, .summary-card h3 {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+.dash-card p, .summary-card p {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+}
 
-loadHistory();
+/* ส่วนของกราฟสถิติ */
+.chart-box {
+    margin-top: 30px;
+    padding: 24px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    clear: both;
+}
+
+/* ส่วนของประวัติ (ตาราง) */
+.history-box { margin-top: 40px; }
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.history-title {
+    font-size: 18px;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.search-box i {
+    position: absolute;
+    left: 12px;
+    color: #94a3b8;
+}
+.search-box input {
+    padding: 10px 14px 10px 38px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    width: 260px;
+    font-size: 14px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+th, td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+tr:hover { background: #f8fafc; }
+
+/* เมื่อหน้าจอกำลังโหลดส่งข้อมูล */
+body.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
