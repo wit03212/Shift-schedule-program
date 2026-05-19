@@ -33,8 +33,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <div class="container">
 
-<!-- title -->
-
 <div class="top-title">
 
 <div class="logo-circle">
@@ -51,13 +49,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </div>
 
-<!-- card -->
-
 <div class="card">
 
 <form id="form">
-
-<!-- employee -->
 
 <div class="section">
 
@@ -115,8 +109,6 @@ readonly
 </div>
 </div>
 
-<!-- old shift -->
-
 <div class="section light-blue">
 
 <div class="section-title blue">
@@ -155,8 +147,6 @@ required
 
 </div>
 </div>
-
-<!-- new shift -->
 
 <div class="section light-green">
 
@@ -197,8 +187,6 @@ required
 </div>
 </div>
 
-<!-- reason -->
-
 <div class="section light-purple">
 
 <div class="section-title purple">
@@ -211,13 +199,11 @@ required
 
 <textarea
 id="reason"
-placeholder="กรุณาระบุเหตุผลในการเปลี่ยนรอบการทำงาน..."
+placeholder="กรุณาระบุเหตุผล..."
 rows="6"
 required></textarea>
 
 </div>
-
-<!-- button -->
 
 <button
 type="submit"
@@ -238,10 +224,6 @@ class="submit-btn"
 
 </p>
 
-<p id="result"></p>
-
-<!-- dashboard -->
-
 <div class="dashboard">
 
 <div class="dash-card">
@@ -254,8 +236,6 @@ class="submit-btn"
 
 </div>
 
-<!-- monthly summary -->
-
 <div class="summary-section">
 
 <div class="summary-card">
@@ -267,8 +247,6 @@ class="submit-btn"
 </div>
 
 </div>
-
-<!-- chart -->
 
 <div class="chart-box">
 
@@ -283,8 +261,6 @@ class="submit-btn"
 <canvas id="shiftChart"></canvas>
 
 </div>
-
-<!-- history -->
 
 <div class="history-box">
 
@@ -305,7 +281,7 @@ class="submit-btn"
 <input
 type="text"
 id="searchInput"
-placeholder="ค้นหารหัสพนักงาน / ชื่อ"
+placeholder="ค้นหา..."
 >
 
 </div>
@@ -321,17 +297,11 @@ placeholder="ค้นหารหัสพนักงาน / ชื่อ"
 <tr>
 
 <th>รหัสพนักงาน</th>
-
-<th>ชื่อ-นามสกุล</th>
-
+<th>ชื่อ</th>
 <th>แผนก</th>
-
-<th>วันที่รอบเดิม</th>
-
+<th>วันที่เดิม</th>
 <th>รอบเดิม</th>
-
-<th>วันที่รอบใหม่</th>
-
+<th>วันที่ใหม่</th>
 <th>รอบใหม่</th>
 
 </tr>
@@ -353,8 +323,6 @@ placeholder="ค้นหารหัสพนักงาน / ชื่อ"
 </div>
 
 </div>
-
-<!-- scripts -->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
