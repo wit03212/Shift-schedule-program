@@ -15,211 +15,118 @@ body{
   overflow-x:hidden;
 
   background:
-  radial-gradient(
-    circle at top left,
-    rgba(59,130,246,0.35),
-    transparent 35%
-  ),
-
-  radial-gradient(
-    circle at bottom right,
-    rgba(236,72,153,0.30),
-    transparent 35%
-  ),
-
-  linear-gradient(
-    135deg,
-    #0f172a 0%,
-    #111827 35%,
-    #1e1b4b 70%,
-    #312e81 100%
-  );
+  radial-gradient(circle at top left, rgba(59,130,246,0.35), transparent 40%),
+  radial-gradient(circle at bottom right, rgba(236,72,153,0.30), transparent 40%),
+  linear-gradient(135deg, #0f172a 0%, #111827 35%, #1e1b4b 70%, #312e81 100%);
 
   background-attachment:fixed;
 
   color:#fff;
 }
 
-/* =========================
-   BACKGROUND EFFECT
-========================= */
+/* ================= BACKGROUND EFFECT ================= */
 
 .bg1,
 .bg2{
 
   position:fixed;
-
   border-radius:50%;
-
   filter:blur(90px);
-
   z-index:-1;
-
   opacity:.6;
 
 }
 
 .bg1{
-
   width:350px;
   height:350px;
-
   background:#3b82f6;
-
   top:-120px;
   left:-120px;
-
 }
 
 .bg2{
-
   width:350px;
   height:350px;
-
   background:#ec4899;
-
   bottom:-120px;
   right:-120px;
-
 }
 
-/* =========================
-   CONTAINER
-========================= */
+/* ================= CONTAINER ================= */
 
 .container{
   width:95%;
   max-width:1200px;
   margin:auto;
-  padding:40px 0;
+  padding:30px 0;
 }
 
-.card{
-
-  background:rgba(255,255,255,.08);
-
-  backdrop-filter:blur(20px);
-
-  border:1px solid rgba(255,255,255,.1);
-
-  border-radius:30px;
-
-  padding:30px;
-
-  box-shadow:
-  0 10px 40px rgba(0,0,0,.3);
-}
-
-/* =========================
-   TITLE
-========================= */
+/* ================= TITLE ================= */
 
 .top-title{
   text-align:center;
-  margin-bottom:30px;
+  margin-bottom:25px;
 }
 
 .logo-circle{
 
-  width:90px;
-  height:90px;
+  width:80px;
+  height:80px;
 
   margin:auto;
 
   border-radius:50%;
 
-  background:linear-gradient(
-    135deg,
-    #3b82f6,
-    #ec4899
-  );
+  background:linear-gradient(135deg,#3b82f6,#ec4899);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  font-size:36px;
+  font-size:30px;
 
-  margin-bottom:20px;
-
-  box-shadow:
-  0 10px 30px rgba(236,72,153,.3);
+  margin-bottom:15px;
 }
 
 .top-title h1{
-  font-size:36px;
-  margin-bottom:10px;
-  font-weight:700;
+  font-size:28px;
+  margin-bottom:8px;
 }
 
 .top-title p{
   opacity:.8;
-  font-size:15px;
 }
 
-/* =========================
-   SECTION
-========================= */
+/* ================= CARD ================= */
 
-.section{
-  margin-bottom:25px;
+.card{
+
+  background:rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,.1);
+
+  border-radius:25px;
+
+  padding:25px;
+
+  box-shadow:0 10px 40px rgba(0,0,0,.3);
 }
 
-.section-title{
-  font-size:20px;
-  margin-bottom:15px;
-  font-weight:600;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.blue{
-  color:#60a5fa;
-}
-
-.green{
-  color:#34d399;
-}
-
-.purple{
-  color:#c084fc;
-}
-
-/* =========================
-   GRID
-========================= */
+/* ================= INPUT ================= */
 
 .grid-3{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:15px;
+  gap:12px;
 }
 
 .grid-2{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-/* =========================
-   INPUT
-========================= */
-
-.input-box{
-  position:relative;
-}
-
-.input-box i{
-
-  position:absolute;
-
-  left:15px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#cbd5e1;
+  gap:12px;
 }
 
 input,
@@ -228,7 +135,7 @@ textarea{
 
   width:100%;
 
-  padding:14px 16px 14px 45px;
+  padding:14px;
 
   border:none;
 
@@ -241,12 +148,9 @@ textarea{
   font-size:15px;
 
   outline:none;
-
-  transition:.3s;
 }
 
 textarea{
-  padding:16px;
   resize:none;
 }
 
@@ -255,79 +159,42 @@ textarea::placeholder{
   color:#cbd5e1;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-
-  background:rgba(255,255,255,.15);
-
-  box-shadow:
-  0 0 0 3px rgba(96,165,250,.2);
-}
-
-select option{
-  color:#000;
-}
-
-/* =========================
-   BUTTON
-========================= */
+/* ================= BUTTON ================= */
 
 .submit-btn{
 
   width:100%;
 
-  padding:16px;
+  padding:15px;
 
   border:none;
 
-  border-radius:16px;
+  border-radius:14px;
 
-  background:linear-gradient(
-    135deg,
-    #2563eb,
-    #ec4899
-  );
+  background:linear-gradient(135deg,#2563eb,#ec4899);
 
   color:#fff;
 
-  font-size:18px;
-
-  font-weight:600;
+  font-size:16px;
 
   cursor:pointer;
 
   margin-top:10px;
 
-  transition:.3s;
 }
 
-.submit-btn:hover{
+/* ================= DASHBOARD ================= */
 
-  transform:translateY(-2px);
+.dashboard{
 
-  box-shadow:
-  0 10px 30px rgba(236,72,153,.35);
-}
+  display:grid;
 
-/* =========================
-   FOOTER
-========================= */
+  grid-template-columns:repeat(2,1fr);
 
-.footer-text{
-  text-align:center;
-  margin-top:18px;
-  opacity:.75;
-  font-size:14px;
-}
+  gap:15px;
 
-/* =========================
-   DASHBOARD
-========================= */
+  margin-top:25px;
 
-.dashboard,
-.summary-section{
-  margin-top:30px;
 }
 
 .dash-card,
@@ -337,61 +204,41 @@ select option{
 
   padding:20px;
 
-  border-radius:20px;
+  border-radius:18px;
 
   text-align:center;
 
-  border:1px solid rgba(255,255,255,.08);
-}
+  backdrop-filter:blur(10px);
 
-.dash-card h3,
-.summary-card h3{
-  margin-bottom:10px;
-  font-size:18px;
 }
 
 .dash-card p,
 .summary-card p{
 
-  font-size:36px;
+  font-size:32px;
 
   font-weight:700;
 
   color:#60a5fa;
+
 }
 
-/* =========================
-   CHART
-========================= */
+/* ================= CHART ================= */
 
 .chart-box,
 .history-box{
 
-  margin-top:30px;
+  margin-top:25px;
 
   background:rgba(255,255,255,.08);
 
-  padding:25px;
+  padding:20px;
 
-  border-radius:20px;
+  border-radius:18px;
 
-  border:1px solid rgba(255,255,255,.08);
 }
 
-.history-title{
-
-  font-size:22px;
-
-  margin-bottom:20px;
-
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-/* =========================
-   HISTORY
-========================= */
+/* ================= SEARCH ================= */
 
 .history-header{
 
@@ -401,28 +248,27 @@ select option{
 
   align-items:center;
 
-  margin-bottom:20px;
+  gap:10px;
+
+  margin-bottom:15px;
+
 }
 
-.search-box{
-  position:relative;
+#searchInput{
+
+  padding:12px;
+
+  border-radius:12px;
+
+  border:none;
+
+  outline:none;
+
+  width:250px;
+
 }
 
-.search-box i{
-
-  position:absolute;
-
-  left:15px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  color:#cbd5e1;
-}
-
-.search-box input{
-  padding-left:40px;
-}
+/* ================= TABLE ================= */
 
 .table-wrapper{
   overflow-x:auto;
@@ -431,198 +277,46 @@ select option{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:700px;
+  min-width:650px;
 }
 
-th,
-td{
-  padding:14px;
+th,td{
+  padding:12px;
   text-align:left;
 }
 
 th{
-
   background:rgba(255,255,255,.08);
-
-  color:#93c5fd;
 }
 
 tr:nth-child(even){
   background:rgba(255,255,255,.04);
 }
 
-tr:hover{
-  background:rgba(255,255,255,.08);
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:768px){
-
-  body{
-    font-size:14px;
-  }
-
-  .container{
-    width:100%;
-    padding:15px;
-  }
-
-  .card{
-    padding:18px;
-    border-radius:22px;
-  }
-
-  .top-title h1{
-    font-size:24px;
-    line-height:1.4;
-  }
-
-  .top-title p{
-    font-size:14px;
-  }
-
-  .logo-circle{
-    width:70px;
-    height:70px;
-    font-size:28px;
-  }
 
   .grid-3,
   .grid-2{
     grid-template-columns:1fr;
-    gap:12px;
   }
 
-  .section-title{
-    font-size:17px;
-  }
-
-  input,
-  select,
-  textarea{
-
-    font-size:16px;
-
-    padding:
-    14px 14px 14px 42px;
-
-    border-radius:14px;
-  }
-
-  textarea{
-    padding:14px;
-  }
-
-  .submit-btn{
-
-    font-size:16px;
-
-    padding:15px;
-
-    border-radius:14px;
-  }
-
-  .dashboard,
-  .summary-section{
-
-    display:block;
-  }
-
-  .dash-card,
-  .summary-card{
-
-    margin-bottom:15px;
-  }
-
-  .dash-card h3,
-  .summary-card h3{
-    font-size:16px;
-  }
-
-  .dash-card p,
-  .summary-card p{
-    font-size:28px;
-  }
-
-  .chart-box,
-  .history-box{
-
-    padding:18px;
-
-    overflow:hidden;
+  .dashboard{
+    grid-template-columns:1fr;
   }
 
   .history-header{
-
     flex-direction:column;
-
     align-items:stretch;
-
-    gap:15px;
   }
 
-  .history-title{
-    font-size:18px;
-  }
-
-  .search-box{
+  #searchInput{
     width:100%;
   }
-
-  .search-box input{
-    width:100%;
-  }
-
-  th,
-  td{
-
-    font-size:13px;
-
-    padding:12px;
-  }
-
-  .footer-text{
-
-    font-size:13px;
-
-    text-align:center;
-
-    line-height:1.6;
-  }
-
-}
-
-/* =========================
-   SMALL MOBILE
-========================= */
-
-@media(max-width:480px){
 
   .top-title h1{
-    font-size:20px;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  .logo-circle{
-    width:60px;
-    height:60px;
-    font-size:24px;
-  }
-
-  input,
-  select,
-  textarea{
-    font-size:15px;
-  }
-
-  .submit-btn{
-    font-size:15px;
+    font-size:22px;
   }
 
 }
