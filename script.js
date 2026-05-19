@@ -5,6 +5,49 @@ const historyTable =
 document.getElementById("historyTable");
 
 const searchInput =
+document.getElementById("searchInput");
+
+const monthlyTotal =
+document.getElementById("monthlyTotal");
+
+const empId =
+document.getElementById("empId");
+
+const fullName =
+document.getElementById("fullName");
+
+const department =
+document.getElementById("department");
+
+const oldDate =
+document.getElementById("oldDate");
+
+const oldShift =
+document.getElementById("oldShift");
+
+const newDate =
+document.getElementById("newDate");
+
+const newShift =
+document.getElementById("newShift");
+
+const reason =
+document.getElementById("reason");
+
+const totalRequest =
+document.getElementById("totalRequest");
+
+let allRows = [];
+
+let chart;
+
+const form =
+document.getElementById("form");
+
+const historyTable =
+document.getElementById("historyTable");
+
+const searchInput =
 document.getElementById(
   "searchInput"
 );
