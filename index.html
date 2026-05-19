@@ -4,25 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-/>
+<title>Shift Dashboard</title>
 
-<title>ระบบเปลี่ยนรอบการทำงาน สาขาบางนา</title>
-
-<link
-rel="stylesheet"
-href="style.css"
-/>
-
+<link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:,">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 
@@ -33,303 +22,124 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <div class="container">
 
+<!-- TITLE -->
 <div class="top-title">
-
-<div class="logo-circle">
-
-<i class="fa-solid fa-calendar-days"></i>
-
+  <div class="logo-circle">
+    <i class="fa-solid fa-calendar-days"></i>
+  </div>
+  <h1>ระบบเปลี่ยนรอบการทำงาน</h1>
+  <p>Dashboard Management</p>
 </div>
 
-<h1>เปลี่ยนรอบการทำงาน สาขาบางนา</h1>
-
-<p>
-กรอกข้อมูลเพื่อส่งคำขอเปลี่ยนรอบการทำงาน
-</p>
-
-</div>
-
+<!-- ================= FORM ================= -->
 <div class="card">
 
 <form id="form">
 
-<div class="section">
+  <div class="section">
 
-<div class="section-title blue">
+    <div class="section-title blue">ข้อมูลพนักงาน</div>
 
-<i class="fa-regular fa-user"></i>
+    <div class="grid-3">
 
-ข้อมูลพนักงาน
+      <input type="text" id="empId" placeholder="รหัสพนักงาน" required>
+      <input type="text" id="fullName" placeholder="ชื่อ-นามสกุล" readonly>
+      <input type="text" id="department" placeholder="แผนก" readonly>
 
-</div>
+    </div>
 
-<div class="grid-3">
+  </div>
 
-<div class="input-box">
+  <div class="grid-2">
 
-<i class="fa-regular fa-id-card"></i>
+    <input type="date" id="oldDate" required>
+    <select id="oldShift" required>
+      <option value="">รอบเดิม</option>
+      <option>A</option><option>B</option><option>C</option>
+    </select>
 
-<input
-type="text"
-id="empId"
-placeholder="รหัสพนักงาน"
-required
->
+  </div>
 
-</div>
+  <div class="grid-2">
 
-<div class="input-box">
+    <input type="date" id="newDate" required>
+    <select id="newShift" required>
+      <option value="">รอบใหม่</option>
+      <option>A</option><option>B</option><option>C</option>
+    </select>
 
-<i class="fa-regular fa-user"></i>
+  </div>
 
-<input
-type="text"
-id="fullName"
-placeholder="ชื่อ-นามสกุล"
-required
-readonly
->
+  <textarea id="reason" rows="4" placeholder="เหตุผล"></textarea>
 
-</div>
-
-<div class="input-box">
-
-<i class="fa-regular fa-building"></i>
-
-<input
-type="text"
-id="department"
-placeholder="แผนก"
-required
-readonly
->
-
-</div>
-
-</div>
-</div>
-
-<div class="section light-blue">
-
-<div class="section-title blue">
-
-<i class="fa-regular fa-calendar"></i>
-
-วันที่รอบเดิม
-
-</div>
-
-<div class="grid-2">
-
-<div class="input-box">
-
-<input
-type="date"
-id="oldDate"
-required
->
-
-</div>
-
-<div class="input-box">
-
-<select id="oldShift" required>
-
-<option value="">รอบการทำงานเดิม</option>
-
-<option>A</option>
-<option>B</option>
-<option>C</option>
-
-</select>
-
-</div>
-
-</div>
-</div>
-
-<div class="section light-green">
-
-<div class="section-title green">
-
-<i class="fa-regular fa-calendar-check"></i>
-
-วันที่รอบใหม่
-
-</div>
-
-<div class="grid-2">
-
-<div class="input-box">
-
-<input
-type="date"
-id="newDate"
-required
->
-
-</div>
-
-<div class="input-box">
-
-<select id="newShift" required>
-
-<option value="">รอบการทำงานใหม่</option>
-
-<option>A</option>
-<option>B</option>
-<option>C</option>
-
-</select>
-
-</div>
-
-</div>
-</div>
-
-<div class="section light-purple">
-
-<div class="section-title purple">
-
-<i class="fa-regular fa-pen-to-square"></i>
-
-เหตุผลในการเปลี่ยนรอบ
-
-</div>
-
-<textarea
-id="reason"
-placeholder="กรุณาระบุเหตุผล..."
-rows="6"
-required></textarea>
-
-</div>
-
-<button
-type="submit"
-class="submit-btn"
->
-
-<i class="fa-regular fa-floppy-disk"></i>
-
-บันทึกข้อมูล
-
-</button>
-
-<p class="footer-text">
-
-<i class="fa-solid fa-lock"></i>
-
-ข้อมูลของท่านจะถูกเก็บเป็นความลับ
-
-</p>
-
-<div class="dashboard">
-
-<div class="dash-card">
-
-<h3>จำนวนคำขอทั้งหมด</h3>
-
-<p id="totalRequest">0</p>
-
-</div>
-
-</div>
-
-<div class="summary-section">
-
-<div class="summary-card">
-
-<h3>สรุปเดือนนี้</h3>
-
-<p id="monthlyTotal">0</p>
-
-</div>
-
-</div>
-
-<div class="chart-box">
-
-<h2 class="history-title">
-
-<i class="fa-solid fa-chart-column"></i>
-
-สถิติการเปลี่ยนรอบ
-
-</h2>
-
-<canvas id="shiftChart"></canvas>
-
-</div>
-
-<div class="history-box">
-
-<div class="history-header">
-
-<h2 class="history-title">
-
-<i class="fa-solid fa-clock-rotate-left"></i>
-
-ประวัติการส่งคำขอ
-
-</h2>
-
-<div class="search-box">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<input
-type="text"
-id="searchInput"
-placeholder="ค้นหา..."
->
-
-</div>
-
-</div>
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>รหัสพนักงาน</th>
-<th>ชื่อ</th>
-<th>แผนก</th>
-<th>วันที่เดิม</th>
-<th>รอบเดิม</th>
-<th>วันที่ใหม่</th>
-<th>รอบใหม่</th>
-
-</tr>
-
-</thead>
-
-<tbody id="historyTable">
-
-</tbody>
-
-</table>
-
-</div>
-
-</div>
+  <button type="submit" class="submit-btn">บันทึกข้อมูล</button>
 
 </form>
+
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div class="dashboard">
+
+  <div class="dash-card">
+    <h3>คำขอทั้งหมด</h3>
+    <p id="totalRequest">0</p>
+  </div>
+
+  <div class="summary-card">
+    <h3>เดือนนี้</h3>
+    <p id="monthlyTotal">0</p>
+  </div>
+
+</div>
+
+<!-- ================= CHART ================= -->
+<div class="chart-box">
+
+  <h2>สถิติการเปลี่ยนรอบ</h2>
+  <canvas id="shiftChart"></canvas>
+
+</div>
+
+<!-- ================= SEARCH + TABLE (แยกจาก FORM แล้ว) ================= -->
+<div class="history-box">
+
+  <div class="history-header">
+
+    <h2>ประวัติการส่งคำขอ</h2>
+
+    <input type="text" id="searchInput" placeholder="ค้นหา...">
+
+  </div>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>รหัส</th>
+          <th>ชื่อ</th>
+          <th>แผนก</th>
+          <th>รอบเดิม</th>
+          <th>รอบใหม่</th>
+        </tr>
+      </thead>
+
+      <tbody id="historyTable"></tbody>
+
+    </table>
+
+  </div>
 
 </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="config.js"></script>
-
 <script src="script.js"></script>
 
 </body>
