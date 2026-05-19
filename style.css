@@ -1,273 +1,326 @@
-/* style.css - โค้ดสำหรับตกแต่งหน้าตาเว็บให้กลับมาสวยงาม */
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Sarabun', sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-    background-color: #f1f5f9;
-    color: #1e293b;
-    min-height: 100vh;
-    padding: 40px 20px;
-    position: relative;
+body{
+
+  font-family:'Kanit',sans-serif;
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+
+  background:
+  radial-gradient(
+    circle at top left,
+    rgba(59,130,246,0.35),
+    transparent 35%
+  ),
+
+  radial-gradient(
+    circle at bottom right,
+    rgba(236,72,153,0.30),
+    transparent 35%
+  ),
+
+  linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #111827 35%,
+    #1e1b4b 70%,
+    #312e81 100%
+  );
+
+  background-attachment:fixed;
+
+  color:#fff;
 }
 
-/* พื้นหลังไล่เฉดสีตกแต่ง */
-.bg1, .bg2 {
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    z-index: -1;
-    filter: blur(100px);
-    opacity: 0.4;
-}
-.bg1 { top: -100px; left: -100px; background-color: #3b82f6; }
-.bg2 { bottom: -100px; right: -100px; background-color: #10b981; }
+.bg1,
+.bg2{
 
-.container {
-    max-width: 850px;
-    margin: 0 auto;
+  position:fixed;
+
+  border-radius:50%;
+
+  filter:blur(90px);
+
+  z-index:-1;
+
+  opacity:.6;
+
 }
 
-/* ส่วนหัวข้อ (Title) */
-.top-title {
-    text-align: center;
-    margin-bottom: 35px;
-}
-.logo-circle {
-    width: 65px;
-    height: 65px;
-    background: #2563eb;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    margin: 0 auto 15px;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-}
-.top-title h1 {
-    font-size: 26px;
-    color: #0f172a;
-    margin-bottom: 6px;
-}
-.top-title p {
-    color: #64748b;
-    font-size: 15px;
+.bg1{
+
+  width:350px;
+  height:350px;
+
+  background:#3b82f6;
+
+  top:-120px;
+  left:-120px;
+
 }
 
-/* การ์ดหลัก */
-.card {
-    background: white;
-    padding: 35px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+.bg2{
+
+  width:350px;
+  height:350px;
+
+  background:#ec4899;
+
+  bottom:-120px;
+  right:-120px;
+
 }
 
-/* จัดกลุ่มข้อมูล (Section) */
-.section {
-    margin-bottom: 25px;
-    padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-}
-.section.light-blue { background-color: #f8fafc; border-left: 5px solid #2563eb; }
-.section.light-green { background-color: #f8fafc; border-left: 5px solid #10b981; }
-.section.light-purple { background-color: #f8fafc; border-left: 5px solid #9333ea; }
-
-.section-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.section-title.blue { color: #2563eb; }
-.section-title.green { color: #10b981; }
-.section-title.purple { color: #9333ea; }
-
-/* Grid Layout สำหรับจัดระเบียบฝั่งพนักงานและวันที่ */
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
+.container{
+  width:95%;
+  max-width:1200px;
+  margin:auto;
+  padding:40px 0;
 }
 
-/* กล่องกรอกข้อมูล */
-.input-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-.input-box i {
-    position: absolute;
-    left: 14px;
-    color: #94a3b8;
-}
-.input-box input, .input-box select, textarea {
-    width: 100%;
-    padding: 12px 14px 12px 40px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    background-color: #ffffff;
-    transition: all 0.2s ease;
-}
-.input-box input:focus, .input-box select:focus, textarea:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-.input-box input[readonly] {
-    background-color: #f8fafc;
-    color: #64748b;
-    cursor: not-allowed;
-    border-color: #e2e8f0;
-}
-.input-box input[type="date"], .input-box select {
-    padding-left: 14px; /* เอาไอคอนออกสำหรับช่องวันที่และเลือกเพื่อความสะอาด */
-}
-textarea {
-    padding: 14px;
-    resize: vertical;
+.card{
+
+  background:rgba(255,255,255,.08);
+
+  backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,.1);
+
+  border-radius:30px;
+
+  padding:30px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,.3);
+
 }
 
-/* ปุ่มบันทึกข้อมูล */
-.submit-btn {
-    width: 100%;
-    padding: 14px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: background 0.2s;
-}
-.submit-btn:hover { background: #1d4ed8; }
-
-.footer-text {
-    text-align: center;
-    color: #94a3b8;
-    font-size: 13px;
-    margin-top: 20px;
+.top-title{
+  text-align:center;
+  margin-bottom:30px;
 }
 
-/* แดชบอร์ดสรุปยอดจำนวนคำขอ */
-.dashboard, .summary-section {
-    display: inline-block;
-    width: 49%;
-    margin-top: 30px;
-    margin-bottom: 25px;
-}
-.summary-section { float: right; }
-.dash-card, .summary-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-}
-.dash-card h3, .summary-card h3 {
-    font-size: 14px;
-    color: #64748b;
-    margin-bottom: 8px;
-}
-.dash-card p, .summary-card p {
-    font-size: 32px;
-    font-weight: 700;
-    color: #0f172a;
+.logo-circle{
+
+  width:90px;
+  height:90px;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:linear-gradient(
+    135deg,
+    #3b82f6,
+    #ec4899
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:36px;
+
+  margin-bottom:20px;
 }
 
-/* ส่วนของกราฟสถิติ */
-.chart-box {
-    margin-top: 30px;
-    padding: 24px;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    clear: both;
+.top-title h1{
+  font-size:36px;
+  margin-bottom:10px;
 }
 
-/* ส่วนของประวัติ (ตาราง) */
-.history-box { margin-top: 40px; }
-.history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-.history-title {
-    font-size: 18px;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-}
-.search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-.search-box i {
-    position: absolute;
-    left: 12px;
-    color: #94a3b8;
-}
-.search-box input {
-    padding: 10px 14px 10px 38px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    width: 260px;
-    font-size: 14px;
+.top-title p{
+  opacity:.8;
 }
 
-.table-wrapper {
-    overflow-x: auto;
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+.section{
+  margin-bottom:25px;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 14px;
-}
-th, td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #e2e8f0;
-    white-space: nowrap;
-}
-th {
-    background: #f8fafc;
-    color: #475569;
-    font-weight: 600;
-}
-tr:hover { background: #f8fafc; }
 
-/* เมื่อหน้าจอกำลังโหลดส่งข้อมูล */
-body.loading {
-    pointer-events: none;
-    opacity: 0.6;
+.section-title{
+  font-size:20px;
+  margin-bottom:15px;
+  font-weight:600;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.input-box{
+  position:relative;
+}
+
+.input-box i{
+
+  position:absolute;
+
+  left:15px;
+  top:50%;
+
+  transform:translateY(-50%);
+
+  color:#cbd5e1;
+}
+
+input,
+select,
+textarea{
+
+  width:100%;
+
+  padding:14px 16px 14px 45px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.1);
+
+  color:#fff;
+
+  font-size:15px;
+
+  outline:none;
+}
+
+textarea{
+  padding:16px;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#cbd5e1;
+}
+
+.submit-btn{
+
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #ec4899
+  );
+
+  color:#fff;
+
+  font-size:18px;
+
+  cursor:pointer;
+
+  margin-top:10px;
+}
+
+.dashboard,
+.summary-section{
+  margin-top:30px;
+}
+
+.dash-card,
+.summary-card{
+
+  background:rgba(255,255,255,.08);
+
+  padding:20px;
+
+  border-radius:20px;
+
+  text-align:center;
+}
+
+.chart-box,
+.history-box{
+
+  margin-top:30px;
+
+  background:rgba(255,255,255,.08);
+
+  padding:25px;
+
+  border-radius:20px;
+}
+
+.history-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:20px;
+}
+
+.search-box{
+  position:relative;
+}
+
+.search-box i{
+
+  position:absolute;
+
+  left:15px;
+  top:50%;
+
+  transform:translateY(-50%);
+}
+
+.search-box input{
+  padding-left:40px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:14px;
+  text-align:left;
+}
+
+th{
+  background:rgba(255,255,255,.08);
+}
+
+tr:nth-child(even){
+  background:rgba(255,255,255,.04);
+}
+
+@media(max-width:768px){
+
+  .grid-3,
+  .grid-2{
+    grid-template-columns:1fr;
+  }
+
+  .history-header{
+    flex-direction:column;
+    gap:15px;
+  }
+
 }
