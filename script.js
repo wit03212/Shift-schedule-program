@@ -248,10 +248,8 @@ function updateMonthlySummary(){
 
     if(!row[9]) return;
 
-    /* ===== FIX TIMEZONE ===== */
-
     const parts =
-    row[9].split("-");
+    String(row[9]).split("-");
 
     const date =
     new Date(
@@ -259,8 +257,6 @@ function updateMonthlySummary(){
       parts[1] - 1,
       parts[2]
     );
-
-    /* ======================== */
 
     if(
 
