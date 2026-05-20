@@ -356,34 +356,37 @@ function updateMonthlySummary(){
 
 function createChart(){
 
-  const shiftCount = {
-
-  "รอบปกติ 7.00-16.00":0,
-  "รอบปกติ 7.30-16.30":0,
-  "รอบปกติ 8.00-17.00":0,
-  "รอบปกติ 8.30-17.30":0,
-  "รอบปกติ 9.00-18.00":0,
-  "รอบปกติ 10.00-19.00":0,
-  "รอบปกติ 11.00-20.00":0,
-  "รอบวันหยุด":0
-
-  };
+  const employeeCount = {};
 
   allRows.forEach(row=>{
 
-    const shift =
-    row[7];
+    const name =
+    row[2];
 
-    if(
-      shiftCount[shift]
-      !== undefined
-    ){
+    if(!name) return;
 
-      shiftCount[shift]++;
+    if(!employeeCount[name]){
+
+      employeeCount[name] = 0;
 
     }
 
+    employeeCount[name]++;
+
   });
+
+  /* เรียงมาก -> น้อย */
+
+  const sorted =
+  Object.entries(employeeCount)
+  .sort((a,b)=> b[1] - a[1])
+  .slice(0,10);
+
+  const labels =
+  sorted.map(item=> item[0]);
+
+  const data =
+  sorted.map(item=> item[1]);
 
   const canvas =
   document.getElementById(
@@ -407,41 +410,26 @@ function createChart(){
 
     data:{
 
-      labels:[
-  "รอบปกติ 7.00-16.00",
-  "รอบปกติ 7.30-16.30",
-  "รอบปกติ 8.00-17.00",
-  "รอบปกติ 8.30-17.30",
-  "รอบปกติ 9.00-18.00",
-  "รอบปกติ 10.00-19.00",
-  "รอบปกติ 11.00-20.00",
-  "รอบวันหยุด"
-      ],
+      labels:labels,
 
       datasets:[{
 
         label:
-        "จำนวนการเปลี่ยนรอบ",
+        "จำนวนการขอเปลี่ยนรอบ",
 
-        data:[
-
-  shiftCount["รอบปกติ 7.00-16.00"],
-  shiftCount["รอบปกติ 7.30-16.30"],
-  shiftCount["รอบปกติ 8.00-17.00"],
-  shiftCount["รอบปกติ 8.30-17.30"],
-  shiftCount["รอบปกติ 9.00-18.00"],
-  shiftCount["รอบปกติ 10.00-19.00"],
-  shiftCount["รอบปกติ 11.00-20.00"],
-  shiftCount["รอบวันหยุด"]
-
-        ],
+        data:data,
 
         backgroundColor:[
-
           "#2563eb",
           "#10b981",
-          "#9333ea"
-
+          "#9333ea",
+          "#ec4899",
+          "#f59e0b",
+          "#06b6d4",
+          "#84cc16",
+          "#ef4444",
+          "#8b5cf6",
+          "#14b8a6"
         ],
 
         borderRadius:12
@@ -458,6 +446,20 @@ function createChart(){
 
         legend:{
           display:false
+        }
+
+      },
+
+      scales:{
+
+        y:{
+
+          beginAtZero:true,
+
+          ticks:{
+            stepSize:1
+          }
+
         }
 
       }
