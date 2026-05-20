@@ -40,7 +40,9 @@ document.getElementById("totalRequest");
 let allRows = [];
 
 let chart;
+let currentPage = 1;
 
+const rowsPerPage = 5;
 /* =========================
    AUTO EMPLOYEE
 ========================= */
@@ -165,7 +167,17 @@ function renderTable(rows){
 
   total = rows.length;
 
-  rows.forEach(row=>{
+  const start =
+  (currentPage - 1)
+  * rowsPerPage;
+
+  const end =
+  start + rowsPerPage;
+
+  const paginatedRows =
+  rows.slice(start,end);
+
+  paginatedRows.forEach(row=>{
 
     historyTable.innerHTML +=
     `
@@ -189,6 +201,61 @@ function renderTable(rows){
     `;
 
   });
+
+  renderPagination(rows);
+
+}
+
+function renderPagination(rows){
+
+  const pageNumbers =
+  document.getElementById(
+    "pageNumbers"
+  );
+
+  pageNumbers.innerHTML =
+  "";
+
+  const totalPages =
+  Math.ceil(
+    rows.length / rowsPerPage
+  );
+
+  for(
+    let i=1;
+    i<=totalPages;
+    i++
+  ){
+
+    const btn =
+    document.createElement(
+      "button"
+    );
+
+    btn.innerText = i;
+
+    if(i === currentPage){
+
+      btn.classList.add(
+        "active"
+      );
+
+    }
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+
+        currentPage = i;
+
+        renderTable(rows);
+
+      }
+    );
+
+    pageNumbers.appendChild(btn);
+
+  }
 
 }
 
@@ -525,3 +592,40 @@ document.body.classList.remove(
 ========================= */
 
 loadHistory();
+document
+.getElementById("prevPage")
+.addEventListener(
+"click",
+()=>{
+
+  if(currentPage > 1){
+
+    currentPage--;
+
+    renderTable(allRows);
+
+  }
+
+});
+
+document
+.getElementById("nextPage")
+.addEventListener(
+"click",
+()=>{
+
+  const totalPages =
+  Math.ceil(
+    allRows.length /
+    rowsPerPage
+  );
+
+  if(currentPage < totalPages){
+
+    currentPage++;
+
+    renderTable(allRows);
+
+  }
+
+});
