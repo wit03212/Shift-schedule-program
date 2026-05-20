@@ -228,9 +228,11 @@ function renderPagination(rows){
   ){
 
     const btn =
-    document.createElement(
-      "button"
-    );
+document.createElement(
+  "button"
+);
+
+btn.type = "button";
 
     btn.innerText = i;
 
