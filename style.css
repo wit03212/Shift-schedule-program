@@ -626,3 +626,53 @@ tr:hover{
   }
 
 }
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-top:20px;
+
+  flex-wrap:wrap;
+}
+
+.pagination button{
+
+  border:none;
+
+  background:rgba(255,255,255,.1);
+
+  color:#fff;
+
+  width:42px;
+
+  height:42px;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  transition:.2s;
+}
+
+.pagination button:hover{
+
+  background:#2563eb;
+}
+
+.pagination button.active{
+
+  background:#2563eb;
+}
